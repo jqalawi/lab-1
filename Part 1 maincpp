@@ -1,0 +1,30 @@
+#include "mbed.h"
+
+// Set blinking rate as a constant
+constexpr auto BLINK_RATE = 500ms;
+
+int main() {
+    // Initialize built-in LEDs for the NUCLEO board
+    DigitalOut led1(LED1);
+    DigitalOut led2(LED2);
+    DigitalOut led3(LED3);
+
+    // Optional: limit to 10 blinks
+    for (int i = 0; i < 10; i++) {
+        // Toggle each LED's state
+        led1 = !led1;
+        led2 = !led2;
+        led3 = !led3;
+
+        // Wait before next toggle
+        ThisThread::sleep_for(BLINK_RATE);
+    }
+
+    // Leave LEDs off after blinking ends
+    led1 = 0;
+    led2 = 0;
+    led3 = 0;
+
+    // Infinite loop to keep the program running
+    while (true);
+}
