@@ -1,0 +1,32 @@
+#include "mbed.h"
+
+// Constants
+constexpr auto BLINK_TIME = 200ms;
+constexpr int BLINK_COUNT = 5;
+
+void blinkAllLeds(DigitalOut& led1, DigitalOut& led2, DigitalOut& led3) {
+    for (int i = 0; i < BLINK_COUNT; ++i) {
+        led1 = led2 = led3 = 1;
+        ThisThread::sleep_for(BLINK_TIME);
+
+        led1 = led2 = led3 = 0;
+        ThisThread::sleep_for(BLINK_TIME);
+    }
+
+    // Final LED states
+    led1 = 1;
+    led2 = 0;
+    led3 = 0;
+}
+
+int main() {
+    DigitalOut led1(LED1);
+    DigitalOut led2(LED2);
+    DigitalOut led3(LED3);
+
+    blinkAllLeds(led1, led2, led3);
+
+    while (true) {
+        ThisThread::sleep_for(1s);  // Keep running with low CPU use
+    }
+}
