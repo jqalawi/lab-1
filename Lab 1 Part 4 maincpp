@@ -1,0 +1,31 @@
+#include "mbed.h"
+
+// Blinking durations
+constexpr auto LED1_ON_TIME = 200ms;
+constexpr auto LED2_ON_TIME = 400ms;
+constexpr auto LED3_ON_TIME = 600ms;
+constexpr auto GAP_TIME     = 50ms;  // Delay between LEDs
+
+int main() {
+    // Initialize LEDs
+    DigitalOut led1(LED1);
+    DigitalOut led2(LED2);
+    DigitalOut led3(LED3);
+
+    while (true) {
+        led1 = 1;
+        ThisThread::sleep_for(LED1_ON_TIME);
+        led1 = 0;
+        ThisThread::sleep_for(GAP_TIME);
+
+        led2 = 1;
+        ThisThread::sleep_for(LED2_ON_TIME);
+        led2 = 0;
+        ThisThread::sleep_for(GAP_TIME);
+
+        led3 = 1;
+        ThisThread::sleep_for(LED3_ON_TIME);
+        led3 = 0;
+        ThisThread::sleep_for(GAP_TIME);
+    }
+}
